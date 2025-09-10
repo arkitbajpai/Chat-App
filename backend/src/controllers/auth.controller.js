@@ -1,7 +1,26 @@
-export const signup= (req,res)=>{
+import {User} from "../models/user.model.js";
+export const signup= async(req,res)=>{
     const {email,fullName,password}= req.body;
    try{
+    if(password.length<6){
+        return res.status(400).json({message:"Password must be at least 6 characters long"});
+    }
+    const existingUser= await User.find({email});
+    if(existingUser){
+        return res.status(400).json({message:"User already exists"});
+    }
+    const salt= await bcrypt.genSalt(10);
+    const hashPassword= await bcrypt.hash(password,salt);
+    const newUser= new User({
+        email:email,
+        fullname:fullName,
+        password:hashPassword,
+    });
 
+    if(newUser){
+        await newUser.save();
+        return res.status(201).json({message:"User created successfully"});
+    }
 
    }
     catch(err){
