@@ -1,5 +1,12 @@
 export const signup= (req,res)=>{
-    res.send("This is signup route");
+    const {email,fullName,password}= req.body;
+   try{
+
+
+   }
+    catch(err){
+        res.status(500).json({message:"Internal server error"});
+   }
 }
 export const login= (req,res)=>{
     res.send("This is login route");
