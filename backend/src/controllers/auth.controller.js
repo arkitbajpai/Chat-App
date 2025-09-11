@@ -1,3 +1,4 @@
+import { grenrateToken } from "../lib/utils.js";
 import {User} from "../models/user.model.js";
 export const signup= async(req,res)=>{
     const {email,fullName,password}= req.body;
@@ -18,8 +19,19 @@ export const signup= async(req,res)=>{
     });
 
     if(newUser){
-        await newUser.save();
-        return res.status(201).json({message:"User created successfully"});
+       grenrateToken(newUser._id,res);
+       await newUser.save();
+         return res.status(201).json({
+        message:"User created successfully",
+        user:{
+            _id:newUser._id,
+            email:newUser.email,
+            fullName:newUser.fullName,
+        }
+    });
+
+    }else{
+        return res.status(400).json({message:"Invalid user data"});
     }
 
    }
