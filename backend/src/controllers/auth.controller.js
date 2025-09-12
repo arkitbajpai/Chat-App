@@ -21,7 +21,7 @@ export const signup= async(req,res)=>{
     if(newUser){
        grenrateToken(newUser._id,res);
        await newUser.save();
-         return res.status(201).json({
+         return res.status(200).json({
         message:"User created successfully",
         user:{
             _id:newUser._id,
