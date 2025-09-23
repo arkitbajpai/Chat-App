@@ -3,7 +3,7 @@ import Navbar from './components/Navbar'
 import {Routes,Route} from 'react-router-dom';
 const App = () => {
   return (
-    <div className='text-red-500' >
+    <div className='text-red-520' >
       <Navbar />
       <Routes>
         <Route path='/' element={<HomePage/>} />
