@@ -7,6 +7,7 @@ import LoginPage from './pages/LoginPage';
 import ProfilePage from './pages/ProfilePage';
 import SettingPage from './pages/SettingPage';
 import { axiosInstance } from './lib/axios';
+import useAuthStore from './store/authStore';
 const App = () => {
   const {authUser,checkAuth}=useAuthStore();
   useEffect(()=>{
